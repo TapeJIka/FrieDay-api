@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('auth_provider',['google','facebook','local'])->default('local');
+            $table->enum('work_schedule',['5/2','6/1','2/2','1/3','3/3','4/2','custom'])->default('local');
             $table->rememberToken();
             $table->timestamps();
         });
